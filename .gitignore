@@ -1,1 +1,4 @@
 .DS_Store
+local/**
+configuration.toml
+tmp/runner-build
