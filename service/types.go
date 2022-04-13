@@ -116,7 +116,7 @@ type Transaction struct {
 	GasWanted uint64 `json:"gasWanted"`
 	GasUsed   uint64 `json:"gasUsed"`
 	Tx        Tx     `json:"tx"`
-	Timestamp string `json:"timestamp"`
+	Timestamp uint64 `json:"timestamp"`
 }
 
 type Log struct {

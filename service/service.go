@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"link/cinema/api"
 	"link/cinema/config"
-	"regexp"
 	"strconv"
 	"strings"
 )
@@ -32,16 +31,18 @@ var (
 )
 
 func checkUrlParam(params ...string) bool {
-	for _, param := range params {
-		matched, err := regexp.MatchString("^[a-zA-Z0-9-_=]*$", param)
-		if err != nil {
-			return false
-		}
-		if len(param) == 0 || !matched {
-			return false
-		}
-	}
-	return true
+	// TODO config.GetAPIConfig().WalletAddress で引っかかった理由
+	return false
+	// for _, param := range params {
+	// 	matched, err := regexp.MatchString("^[a-zA-Z0-9-_=]*$", param)
+	// 	if err != nil {
+	// 		return false
+	// 	}
+	// 	if len(param) == 0 || !matched {
+	// 		return false
+	// 	}
+	// }
+	// return true
 }
 
 func GetUserInfo(userID string) (*UserInfo, error) {
