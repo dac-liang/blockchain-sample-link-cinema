@@ -378,8 +378,19 @@ func GetNonFungibleTransactionHistory(userID, contractID, tokenType, tokenIndex 
 		}
 	}
 
+	mintParams := MintNonFungibleParams{}
+	for _, params := range mintMsg.Params {
+		marshaledParams, err := json.Marshal(params)
+		if err != nil {
+			return nil, err
+		}
+		if err := json.Unmarshal(marshaledParams, &mintParams); err != nil {
+			return nil, err
+		}
+	}
+
 	meta := NonFungibleMetadata{}
-	if err := json.Unmarshal([]byte(mintMsg.Meta), &meta); err != nil {
+	if err := json.Unmarshal([]byte(mintParams.Meta), &meta); err != nil {
 		return nil, err
 	}
 

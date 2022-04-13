@@ -176,13 +176,20 @@ type FungibleAmount struct {
 	TokenID string `json:"tokenId"`
 }
 
+type MintNonFungibleParams struct {
+	Meta       string `json:"meta"`
+	Name       string `json:"name"`
+	TokenType  string `json:"tokenType"`
+}
+
 type MintNonFungibleMsg struct {
 	From       string `json:"from"`
 	To         string `json:"to"`
 	ContractID string `json:"contractId"`
-	Meta       string `json:"meta"`
-	Name       string `json:"name"`
-	TokenType  string `json:"tokenType"`
+	Params []MintNonFungibleParams `json:"params"`
+	// Meta       string `json:"meta"`
+	// Name       string `json:"name"`
+	// TokenType  string `json:"tokenType"`
 }
 
 type Signature struct {
