@@ -41,8 +41,18 @@ LINK Cinema server reads the configuration file through the environment variable
 ```bash
 $ export CONFIG_PATH={config toml file path}
 ```
+
+example
+
+```bash
+$ export CONFIG_PATH=./configuration.toml
+```
  
 ### Building source code
+ 
+```bash
+$ go mod tidy
+```
  
 ```bash
 $ make
@@ -59,7 +69,30 @@ To check out the API endpoints provided by the LINK Cinema server, open the API 
 ```bash
 $ {endpoint}/swagger/index.html
 ```
- 
+
+## Running with docker
+
+```bash
+$ docker-compose up -d
+```
+
+watch log after started
+
+```bash
+$ docker logs -f dac-cinema-api 
+```
+
+or just start with watching mode
+
+```bash
+$ docker-compose up
+```
+## Stop docker-compose
+
+```bash
+$ docker-compose down
+```
+
 ## How to contribute
  
 See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
