@@ -1,6 +1,7 @@
 package main
 
 import (
+	"link/cinema/config"
 	"log"
 	"time"
 
@@ -60,8 +61,10 @@ func InitAuth() gin.HandlerFunc {
 			}
 			userID := loginVals.Username
 			password := loginVals.Password
-
-			if (userID == "admin" && password == "admin") || (userID == "test" && password == "test") {
+			guiUserId := config.GetAPIConfig().GuiUserId
+			guiUserPw := config.GetAPIConfig().GuiUserPw
+			if (userID == guiUserId && password == guiUserPw) || (userID == "test" && password == "test") {
+			// if (userID == "admin" && password == "admin") || (userID == "test" && password == "test") {
 				return &User{
 					UserName:  userID,
 					LastName:  "Yamada",
@@ -71,13 +74,13 @@ func InitAuth() gin.HandlerFunc {
 
 			return nil, jwt.ErrFailedAuthentication
 		},
-		Authorizator: func(data interface{}, c *gin.Context) bool {
-			if v, ok := data.(*User); ok && v.UserName == "admin" {
-				return true
-			}
+		// Authorizator: func(data interface{}, c *gin.Context) bool {
+		// 	if v, ok := data.(*User); ok && v.UserName == "admin" {
+		// 		return true
+		// 	}
 
-			return false
-		},
+		// 	return false
+		// },
 		Unauthorized: func(c *gin.Context, code int, message string) {
 			c.JSON(code, gin.H{
 				"code":    code,

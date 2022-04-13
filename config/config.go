@@ -37,6 +37,8 @@ type APIConfig struct {
 	FungibleTokenType    string `json:"fungibleTokenType"`
 	NonFungibleTokenType string `json:"non-fungibleTokenType"`
 	UserID               string `json:"user-id"`
+	GuiUserId            string `json:"gui-user-id"`
+	GuiUserPw            string `json:"gui-user-pw"`
 }
 
 const (
