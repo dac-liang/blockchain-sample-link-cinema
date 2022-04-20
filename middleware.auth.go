@@ -63,8 +63,9 @@ func InitAuth() gin.HandlerFunc {
 			password := loginVals.Password
 			guiUserId := config.GetAPIConfig().GuiUserId
 			guiUserPw := config.GetAPIConfig().GuiUserPw
-			if (userID == guiUserId && password == guiUserPw) || (userID == "test" && password == "test") {
-			// if (userID == "admin" && password == "admin") || (userID == "test" && password == "test") {
+			testUserId := config.GetAPIConfig().TestUserId
+			testUserPw := config.GetAPIConfig().TestUserPw
+			if (userID == guiUserId && password == guiUserPw) || (userID == testUserId && password == testUserPw) {
 				return &User{
 					UserName:  userID,
 					LastName:  "Yamada",
@@ -74,13 +75,13 @@ func InitAuth() gin.HandlerFunc {
 
 			return nil, jwt.ErrFailedAuthentication
 		},
-		// Authorizator: func(data interface{}, c *gin.Context) bool {
-		// 	if v, ok := data.(*User); ok && v.UserName == "admin" {
-		// 		return true
-		// 	}
+		Authorizator: func(data interface{}, c *gin.Context) bool {
+			if v, ok := data.(*User); ok && v.UserName == config.GetAPIConfig().GuiUserId {
+				return true
+			}
 
-		// 	return false
-		// },
+			return false
+		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
 			c.JSON(code, gin.H{
 				"code":    code,

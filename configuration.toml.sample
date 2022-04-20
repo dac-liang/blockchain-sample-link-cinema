@@ -1,0 +1,35 @@
+# LINE Blockchain DevelopersのCashew用のreal APIサーバーアドレスです。
+LBDAPIEndpoint = ""
+# LINEのreal APIサーバーのアドレスです。
+LINEAPIEndpoint = ""
+# LINE Accessのrealサーバーのアドレスです。
+LINEAccessEndpoint = ""
+# サービスサーバーのアドレスです。ローカルホストを入力します。
+Endpoint = ""
+# 1-4で作成したサービスウォレットのアドレスを入力します。LINE Blockchain Developersで確認できます。
+WalletAddress = ""
+# 1-4で作成したサービスウォレットのsecretを入力します。
+WalletSecret = ""
+# 1-3で発行されたサービスのAPI keyを入力します。LINE Blockchain Developersで確認できます。
+APIKey = ""
+# 1-3で発行されたサービスのAPI secretを入力します。
+APISecret = ""
+# 1-1で作成したチャネルのIDを入力します。LINE Developersで確認できます。
+ChannelID = ""
+# 1-1で作成したチャネルのsecretを入力します。LINE Developersで確認できます。
+ChannelSecret = ""
+# 1-5で作成したサービストークンのcontract IDを入力します。LINE Blockchain Developersで確認できます。
+ServiceContractID = ""
+# 1-5で作成したアイテムトークンのcontract IDを入力します。LINE Blockchain Developersで確認できます。
+ItemContractID = ""
+# 1-6で作成したnon-fungible アイテムトークンのToken Typeを入力します。LINE Blockchain Developersで確認できます。
+FungibleTokenType = ""
+# 1-7で作成したfungible アイテムトークンのToken Typeを入力します。LINE Blockchain Developersで確認できます。
+NonFungibleTokenType = ""
+# 1-2で確認したLINEアカウントのUser IDを入力します。
+UserID = ""
+# JWT 関連ログイン情報
+GuiUserId = ""
+GuiUserPw = ""
+TestUserId = ""
+TestUserPw = ""

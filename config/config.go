@@ -39,6 +39,8 @@ type APIConfig struct {
 	UserID               string `json:"user-id"`
 	GuiUserId            string `json:"gui-user-id"`
 	GuiUserPw            string `json:"gui-user-pw"`
+	TestUserId            string `json:"test-user-id"`
+	TestUserPw            string `json:"test-user-pw"`
 }
 
 const (
