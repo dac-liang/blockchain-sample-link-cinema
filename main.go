@@ -18,6 +18,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -29,7 +30,6 @@ import (
 	"link/cinema/config"
 	"link/cinema/controller"
 	"link/cinema/docs"
-	"os"
 	"strings"
 )
 
@@ -57,6 +57,9 @@ func main() {
 	if configPath := os.Getenv(config.Path); configPath != "" {
 		config.LoadAPIConfig(configPath)
 	}
+	// Google Cloud Run 環境変数上書き
+	config.InitAPIConfig()
+
 	host := config.GetAPIConfig().Endpoint
 	if strings.HasPrefix(host, "http://") {
 		host = host[7:]

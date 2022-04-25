@@ -17,8 +17,10 @@ package config
 
 import (
 	"fmt"
-	"github.com/BurntSushi/toml"
 	"io/ioutil"
+	"os"
+
+	"github.com/BurntSushi/toml"
 )
 
 type APIConfig struct {
@@ -69,4 +71,26 @@ func LoadAPIConfig(path string) {
 		fmt.Println(err.Error())
 		return
 	}
+}
+
+func InitAPIConfig() {
+	apiConfig.LBDAPIEndpoint = os.Getenv("LBDAPIEndpoint")
+	apiConfig.LINEAPIEndpoint = os.Getenv("LINEAPIEndpoint")
+	apiConfig.LINEAccessEndpoint = os.Getenv("LINEAccessEndpoint")
+	apiConfig.Endpoint = os.Getenv("Endpoint")
+	apiConfig.WalletAddress = os.Getenv("WalletAddress")
+	apiConfig.WalletSecret = os.Getenv("WalletSecret")
+	apiConfig.APIKey = os.Getenv("APIKey")
+	apiConfig.APISecret = os.Getenv("APISecret")
+	apiConfig.ChannelID = os.Getenv("ChannelID")
+	apiConfig.ChannelSecret = os.Getenv("ChannelSecret")
+	apiConfig.ServiceContractID = os.Getenv("ServiceContractID")
+	apiConfig.ItemContractID = os.Getenv("ItemContractID")
+	apiConfig.FungibleTokenType = os.Getenv("FungibleTokenType")
+	apiConfig.NonFungibleTokenType = os.Getenv("NonFungibleTokenType")
+	apiConfig.UserID = os.Getenv("UserID")
+	apiConfig.GuiUserId = os.Getenv("GuiUserId")
+	apiConfig.GuiUserPw = os.Getenv("GuiUserPw")
+	apiConfig.TestUserId = os.Getenv("TestUserId")
+	apiConfig.TestUserPw = os.Getenv("TestUserPw")
 }
