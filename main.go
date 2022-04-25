@@ -114,7 +114,7 @@ func main() {
 		}
 		test := v0.Group("/test")
 		{
-			test.GET("/init", ctr.InitUser)
+			// test.GET("/init", ctr.InitUser)
 
 			test.GET("/transaction", ctr.GetTransaction)
 			// test.GET("/config", ctr.ShowConfig)

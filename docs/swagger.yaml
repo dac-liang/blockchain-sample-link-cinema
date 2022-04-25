@@ -349,42 +349,42 @@ info:
   title: Link Cinema API
   version: "0.1"
 paths:
-  /test/config:
-    get:
-      consumes:
-      - application/json
-      description: Show a config
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Server Configuration
-          schema:
-            $ref: '#/definitions/config.APIConfig'
-      summary: Show a config
-      tags:
-      - test
-  /test/init:
-    get:
-      consumes:
-      - application/json
-      description: Transfer tokens to user
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: transaction hashes has executed
-          schema:
-            items:
-              type: string
-            type: array
-        "500":
-          description: Internal server error
-          schema:
-            type: string
-      summary: Init asset for test user
-      tags:
-      - test
+  # /test/config:
+  #   get:
+  #     consumes:
+  #     - application/json
+  #     description: Show a config
+  #     produces:
+  #     - application/json
+  #     responses:
+  #       "200":
+  #         description: Server Configuration
+  #         schema:
+  #           $ref: '#/definitions/config.APIConfig'
+  #     summary: Show a config
+  #     tags:
+  #     - test
+  # /test/init:
+  #   get:
+  #     consumes:
+  #     - application/json
+  #     description: Transfer tokens to user
+  #     produces:
+  #     - application/json
+  #     responses:
+  #       "200":
+  #         description: transaction hashes has executed
+  #         schema:
+  #           items:
+  #             type: string
+  #           type: array
+  #       "500":
+  #         description: Internal server error
+  #         schema:
+  #           type: string
+  #     summary: Init asset for test user
+  #     tags:
+  #     - test
   /test/transaction:
     get:
       consumes:
