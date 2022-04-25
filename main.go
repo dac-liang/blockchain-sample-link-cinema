@@ -117,7 +117,7 @@ func main() {
 			test.GET("/init", ctr.InitUser)
 
 			test.GET("/transaction", ctr.GetTransaction)
-			test.GET("/config", ctr.ShowConfig)
+			// test.GET("/config", ctr.ShowConfig)
 		}
 	}
 
