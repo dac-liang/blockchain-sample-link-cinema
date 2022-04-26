@@ -1,63 +1,26 @@
 basePath: /api/v0
 definitions:
-  config.APIConfig:
-    properties:
-      apiKey:
-        type: string
-      apiSecret:
-        type: string
-      channel-id:
-        type: string
-      channelSecret:
-        type: string
-      endpoint:
-        type: string
-      fungibleTokenType:
-        type: string
-      itemContract-id:
-        type: string
-      lbd-api-endpoint:
-        type: string
-      line-api-endpoint:
-        type: string
-      lineAccessEndpoint:
-        type: string
-      non-fungibleTokenType:
-        type: string
-      serviceContract-id:
-        type: string
-      user-id:
-        type: string
-      walletAddress:
-        type: string
-      walletSecret:
-        type: string
-    type: object
   controller.BaseCoinBalance:
     properties:
       coinInfo:
         $ref: '#/definitions/service.BaseCoinBalance'
-        type: object
       transactions:
         items:
           $ref: '#/definitions/service.Transaction'
         type: array
       userInfo:
         $ref: '#/definitions/service.UserInfo'
-        type: object
     type: object
   controller.MovieDiscountBalance:
     properties:
       tokenInfo:
         $ref: '#/definitions/service.FungibleBalance'
-        type: object
       transactions:
         items:
           $ref: '#/definitions/service.Transaction'
         type: array
       userInfo:
         $ref: '#/definitions/service.UserInfo'
-        type: object
     type: object
   controller.MovieTicketBalance:
     properties:
@@ -72,33 +35,27 @@ definitions:
     properties:
       movieInfo:
         $ref: '#/definitions/service.MovieInfo'
-        type: object
       name:
         type: string
       paymentInfo:
         $ref: '#/definitions/service.PaymentInfo'
-        type: object
       ticketInfo:
         $ref: '#/definitions/service.TicketInfo'
-        type: object
       tokenId:
         type: string
       transactions:
         $ref: '#/definitions/service.NonFungibleTxHistory'
-        type: object
     type: object
   controller.MovieTokenBalance:
     properties:
       tokenInfo:
         $ref: '#/definitions/service.ServiceTokenBalance'
-        type: object
       transactions:
         items:
           $ref: '#/definitions/service.Transaction'
         type: array
       userInfo:
         $ref: '#/definitions/service.UserInfo'
-        type: object
     type: object
   service.Amount:
     properties:
@@ -169,8 +126,7 @@ definitions:
     properties:
       type:
         type: string
-      value:
-        type: object
+      value: {}
     type: object
   service.MovieInfo:
     properties:
@@ -191,13 +147,10 @@ definitions:
     properties:
       mintTransaction:
         $ref: '#/definitions/service.Transaction'
-        type: object
       paymentTransaction:
         $ref: '#/definitions/service.Transaction'
-        type: object
       pointTransaction:
         $ref: '#/definitions/service.Transaction'
-        type: object
     type: object
   service.PaymentInfo:
     properties:
@@ -232,13 +185,10 @@ definitions:
     properties:
       movieInfo:
         $ref: '#/definitions/service.MovieInfo'
-        type: object
       priceInfo:
         $ref: '#/definitions/service.PriceInfo'
-        type: object
       ticketInfo:
         $ref: '#/definitions/service.TicketInfo'
-        type: object
     type: object
   service.ServiceTokenBalance:
     properties:
@@ -259,7 +209,6 @@ definitions:
     properties:
       pubKey:
         $ref: '#/definitions/service.PubKey'
-        type: object
       signature:
         type: string
     type: object
@@ -293,10 +242,9 @@ definitions:
       raw_log:
         type: string
       timestamp:
-        type: string
+        type: integer
       tx:
         $ref: '#/definitions/service.Tx'
-        type: object
       txhash:
         type: string
     type: object
@@ -313,13 +261,11 @@ definitions:
         type: string
       value:
         $ref: '#/definitions/service.TxValue'
-        type: object
     type: object
   service.TxValue:
     properties:
       fee:
         $ref: '#/definitions/service.Fee'
-        type: object
       memo:
         type: string
       msg:
@@ -349,42 +295,6 @@ info:
   title: Link Cinema API
   version: "0.1"
 paths:
-  # /test/config:
-  #   get:
-  #     consumes:
-  #     - application/json
-  #     description: Show a config
-  #     produces:
-  #     - application/json
-  #     responses:
-  #       "200":
-  #         description: Server Configuration
-  #         schema:
-  #           $ref: '#/definitions/config.APIConfig'
-  #     summary: Show a config
-  #     tags:
-  #     - test
-  # /test/init:
-  #   get:
-  #     consumes:
-  #     - application/json
-  #     description: Transfer tokens to user
-  #     produces:
-  #     - application/json
-  #     responses:
-  #       "200":
-  #         description: transaction hashes has executed
-  #         schema:
-  #           items:
-  #             type: string
-  #           type: array
-  #       "500":
-  #         description: Internal server error
-  #         schema:
-  #           type: string
-  #     summary: Init asset for test user
-  #     tags:
-  #     - test
   /test/transaction:
     get:
       consumes:
@@ -455,7 +365,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Commit transactions to purchase movie-ticket token and mint a movie-ticket token to user wallet
+      description: Commit transactions to purchase movie-ticket token and mint a movie-ticket
+        token to user wallet
       parameters:
       - description: Purchase info
         in: body
@@ -493,7 +404,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Request user to transfer movie-token used for discounting ticket price
+      description: Request user to transfer movie-token used for discounting ticket
+        price
       parameters:
       - description: Purchase info
         in: body
@@ -578,12 +490,14 @@ paths:
     get:
       consumes:
       - application/json
-      description: Retrieve movie-ticket token balance and summary using its token index
+      description: Retrieve movie-ticket token balance and summary using its token
+        index
       produces:
       - application/json
       responses:
         "200":
-          description: Movie-ticket token balance and summary with provided token index
+          description: Movie-ticket token balance and summary with provided token
+            index
           schema:
             $ref: '#/definitions/controller.MovieTicketBalance'
         "500":
