@@ -3,3 +3,6 @@
 cinema:
 		go mod verify
 		go install
+
+swag-update:
+		swag init ./main.go

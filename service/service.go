@@ -625,7 +625,7 @@ func RequestProxy(userID, contractID string) (*TransferRequestResult, error) {
 
 	params := map[string]interface{}{
 		"ownerAddress": config.GetAPIConfig().WalletAddress,
-		//"landingUri":   fmt.Sprintf("%s/swagger/index.html", config.GetAPIConfig().Endpoint),
+		"landingUri":   fmt.Sprintf("%s/swagger/index.html", config.GetAPIConfig().Endpoint),
 	}
 
 	apiResult, err := api.CallAPI(path, "POST", query, params)

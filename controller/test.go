@@ -17,8 +17,8 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"link/cinema/api"
-	"link/cinema/config"
+	// "link/cinema/api"
+	// "link/cinema/config"
 	"link/cinema/service"
 )
 
@@ -45,38 +45,38 @@ func (ctr *Controller) GetTransaction(c *gin.Context) {
 //@Success 200 {array} string "transaction hashes has executed"
 //@Failure 500 {string} string "Internal server error"
 //@Router /test/init [get]
-func (ctr *Controller) InitUser(c *gin.Context) {
-	userProfile := api.UserProfile{
-		UserID: config.GetAPIConfig().UserID,
-	}
+// func (ctr *Controller) InitUser(c *gin.Context) {
+// 	userProfile := api.UserProfile{
+// 		UserID: config.GetAPIConfig().UserID,
+// 	}
 
-	txs := make([]string, 0)
+// 	txs := make([]string, 0)
 
-	cfg := config.GetAPIConfig()
+// 	cfg := config.GetAPIConfig()
 
-	tx, err := service.TransferBaseCoin(userProfile.UserID, "100000000")
-	if err != nil {
-		c.String(500, err.Error())
-		return
-	}
-	txs = append(txs, tx.TxHash)
+// 	tx, err := service.TransferBaseCoin(userProfile.UserID, "100000000")
+// 	if err != nil {
+// 		c.String(500, err.Error())
+// 		return
+// 	}
+// 	txs = append(txs, tx.TxHash)
 
-	tx, err = service.TransferServiceToken(userProfile.UserID, cfg.ServiceContractID, "10000000000")
-	if err != nil {
-		c.String(500, err.Error())
-		return
-	}
-	txs = append(txs, tx.TxHash)
+// 	tx, err = service.TransferServiceToken(userProfile.UserID, cfg.ServiceContractID, "10000000000")
+// 	if err != nil {
+// 		c.String(500, err.Error())
+// 		return
+// 	}
+// 	txs = append(txs, tx.TxHash)
 
-	tx, err = service.MintFungible(userProfile.UserID, cfg.ItemContractID, cfg.FungibleTokenType, "10")
-	if err != nil {
-		c.String(500, err.Error())
-		return
-	}
-	txs = append(txs, tx.TxHash)
+// 	tx, err = service.MintFungible(userProfile.UserID, cfg.ItemContractID, cfg.FungibleTokenType, "10")
+// 	if err != nil {
+// 		c.String(500, err.Error())
+// 		return
+// 	}
+// 	txs = append(txs, tx.TxHash)
 
-	c.JSON(200, txs)
-}
+// 	c.JSON(200, txs)
+// }
 
 //@Summary Show a config
 //@Description Show a config
@@ -85,6 +85,6 @@ func (ctr *Controller) InitUser(c *gin.Context) {
 //@Produce json
 //@Success 200 {object} config.APIConfig "Server Configuration"
 //@Router /test/config [get]
-func (ctr *Controller) ShowConfig(c *gin.Context) {
-	c.JSON(200, config.GetAPIConfig())
-}
+// func (ctr *Controller) ShowConfig(c *gin.Context) {
+// 	c.JSON(200, config.GetAPIConfig())
+// }

@@ -17,17 +17,23 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
+	"log"
+	"os"
+
+	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
-	"github.com/swaggo/gin-swagger"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
+	// "github.com/gin-contrib/sessions"
+	// "github.com/gin-contrib/sessions/cookie"
 	"link/cinema/config"
 	"link/cinema/controller"
 	"link/cinema/docs"
-	"os"
 	"strings"
 )
+
+var authMiddleware *jwt.GinJWTMiddleware
 
 // @title Link Cinema API
 // @version 0.1
@@ -44,12 +50,16 @@ import (
 // @BasePath /api/v0
 func main() {
 	r := gin.Default()
-	store := cookie.NewStore([]byte("secret"))
-	r.Use(sessions.Sessions("session", store))
+	// TODO GetUserProfileFromSession に合わせて実装される想定の形跡があるけど、実装されなかったため、一旦は gin-jwt で進める
+	// store := cookie.NewStore([]byte("secret"))
+	// r.Use(sessions.Sessions("session", store))
 
 	if configPath := os.Getenv(config.Path); configPath != "" {
 		config.LoadAPIConfig(configPath)
 	}
+	// Google Cloud Run 環境変数上書き
+	config.InitAPIConfig()
+
 	host := config.GetAPIConfig().Endpoint
 	if strings.HasPrefix(host, "http://") {
 		host = host[7:]
@@ -59,9 +69,25 @@ func main() {
 	}
 	docs.SwaggerInfo.Host = host
 
+	// the jwt middleware
+	r.Use(InitAuth())
+	r.POST("/login", authMiddleware.LoginHandler)
+	r.NoRoute(authMiddleware.MiddlewareFunc(), func(c *gin.Context) {
+		claims := jwt.ExtractClaims(c)
+		log.Printf("NoRoute claims: %#v\n", claims)
+		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
+	})
+	auth := r.Group("/auth")
+	auth.GET("/refresh_token", authMiddleware.RefreshHandler)
+	auth.Use(authMiddleware.MiddlewareFunc())
+	{
+		auth.GET("/hello", helloHandler)
+	}
+
 	ctr := controller.NewController()
 
 	v0 := r.Group("/api/v0")
+	v0.Use(authMiddleware.MiddlewareFunc())
 	{
 		user := v0.Group("/user")
 		{
@@ -88,10 +114,10 @@ func main() {
 		}
 		test := v0.Group("/test")
 		{
-			test.GET("/init", ctr.InitUser)
+			// test.GET("/init", ctr.InitUser)
 
 			test.GET("/transaction", ctr.GetTransaction)
-			test.GET("/config", ctr.ShowConfig)
+			// test.GET("/config", ctr.ShowConfig)
 		}
 	}
 

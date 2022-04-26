@@ -17,61 +17,6 @@
     },
     "basePath": "/api/v0",
     "paths": {
-        "/test/config": {
-            "get": {
-                "description": "Show a config",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "test"
-                ],
-                "summary": "Show a config",
-                "responses": {
-                    "200": {
-                        "description": "Server Configuration",
-                        "schema": {
-                            "$ref": "#/definitions/config.APIConfig"
-                        }
-                    }
-                }
-            }
-        },
-        "/test/init": {
-            "get": {
-                "description": "Transfer tokens to user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "test"
-                ],
-                "summary": "Init asset for test user",
-                "responses": {
-                    "200": {
-                        "description": "transaction hashes has executed",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/test/transaction": {
             "get": {
                 "description": "Retrieve a Transaction using its hash",
@@ -487,61 +432,10 @@
         }
     },
     "definitions": {
-        "config.APIConfig": {
-            "type": "object",
-            "properties": {
-                "apiKey": {
-                    "type": "string"
-                },
-                "apiSecret": {
-                    "type": "string"
-                },
-                "channel-id": {
-                    "type": "string"
-                },
-                "channelSecret": {
-                    "type": "string"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "fungibleTokenType": {
-                    "type": "string"
-                },
-                "itemContract-id": {
-                    "type": "string"
-                },
-                "lbd-api-endpoint": {
-                    "type": "string"
-                },
-                "line-api-endpoint": {
-                    "type": "string"
-                },
-                "lineAccessEndpoint": {
-                    "type": "string"
-                },
-                "non-fungibleTokenType": {
-                    "type": "string"
-                },
-                "serviceContract-id": {
-                    "type": "string"
-                },
-                "user-id": {
-                    "type": "string"
-                },
-                "walletAddress": {
-                    "type": "string"
-                },
-                "walletSecret": {
-                    "type": "string"
-                }
-            }
-        },
         "controller.BaseCoinBalance": {
             "type": "object",
             "properties": {
                 "coinInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.BaseCoinBalance"
                 },
                 "transactions": {
@@ -551,7 +445,6 @@
                     }
                 },
                 "userInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.UserInfo"
                 }
             }
@@ -560,7 +453,6 @@
             "type": "object",
             "properties": {
                 "tokenInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.FungibleBalance"
                 },
                 "transactions": {
@@ -570,7 +462,6 @@
                     }
                 },
                 "userInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.UserInfo"
                 }
             }
@@ -593,25 +484,21 @@
             "type": "object",
             "properties": {
                 "movieInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.MovieInfo"
                 },
                 "name": {
                     "type": "string"
                 },
                 "paymentInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.PaymentInfo"
                 },
                 "ticketInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.TicketInfo"
                 },
                 "tokenId": {
                     "type": "string"
                 },
                 "transactions": {
-                    "type": "object",
                     "$ref": "#/definitions/service.NonFungibleTxHistory"
                 }
             }
@@ -620,7 +507,6 @@
             "type": "object",
             "properties": {
                 "tokenInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.ServiceTokenBalance"
                 },
                 "transactions": {
@@ -630,7 +516,6 @@
                     }
                 },
                 "userInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.UserInfo"
                 }
             }
@@ -742,9 +627,7 @@
                 "type": {
                     "type": "string"
                 },
-                "value": {
-                    "type": "object"
-                }
+                "value": {}
             }
         },
         "service.MovieInfo": {
@@ -774,15 +657,12 @@
             "type": "object",
             "properties": {
                 "mintTransaction": {
-                    "type": "object",
                     "$ref": "#/definitions/service.Transaction"
                 },
                 "paymentTransaction": {
-                    "type": "object",
                     "$ref": "#/definitions/service.Transaction"
                 },
                 "pointTransaction": {
-                    "type": "object",
                     "$ref": "#/definitions/service.Transaction"
                 }
             }
@@ -836,15 +716,12 @@
             "type": "object",
             "properties": {
                 "movieInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.MovieInfo"
                 },
                 "priceInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.PriceInfo"
                 },
                 "ticketInfo": {
-                    "type": "object",
                     "$ref": "#/definitions/service.TicketInfo"
                 }
             }
@@ -876,7 +753,6 @@
             "type": "object",
             "properties": {
                 "pubKey": {
-                    "type": "object",
                     "$ref": "#/definitions/service.PubKey"
                 },
                 "signature": {
@@ -929,10 +805,9 @@
                     "type": "string"
                 },
                 "timestamp": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "tx": {
-                    "type": "object",
                     "$ref": "#/definitions/service.Tx"
                 },
                 "txhash": {
@@ -958,7 +833,6 @@
                     "type": "string"
                 },
                 "value": {
-                    "type": "object",
                     "$ref": "#/definitions/service.TxValue"
                 }
             }
@@ -967,7 +841,6 @@
             "type": "object",
             "properties": {
                 "fee": {
-                    "type": "object",
                     "$ref": "#/definitions/service.Fee"
                 },
                 "memo": {
